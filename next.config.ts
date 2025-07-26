@@ -1,45 +1,47 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Enable static exports
   output: 'export',
+  
   // Disable all type checking
   typescript: {
     ignoreBuildErrors: true,
   },
+  
   // Disable all linting
   eslint: {
     ignoreDuringBuilds: true,
   },
+  
   // Disable React strict mode
   reactStrictMode: false,
-  // Disable image optimization
+  
+  // Configure images for static export
   images: {
     unoptimized: true,
+    domains: [],
   },
+  
+  // Disable source maps
+  productionBrowserSourceMaps: false,
+  
+  // Disable telemetry
+  telemetry: false,
+  
+  // Disable static optimization
+  staticPageGenerationTimeout: 1000,
+  
+  // Disable swc minification
+  swcMinify: false,
+  
   // Webpack config to ignore all warnings and errors
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     config.ignoreWarnings = [
       { module: /./, message: /./ },
     ];
     return config;
   },
-  // Disable source maps
-  productionBrowserSourceMaps: false,
-  // Experimental flags
-  experimental: {
-    forceSwcTransforms: true,
-    esmExternals: false
-  },
-  // Disable all logging
-  logging: {
-    fetches: {
-      fullUrl: false,
-    },
-  },
-  // Disable static optimization
-  staticPageGenerationTimeout: 1000,
-  // Disable swc minification
-  swcMinify: false,
 };
 
 export default nextConfig;
